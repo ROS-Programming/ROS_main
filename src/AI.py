@@ -93,19 +93,21 @@ def talker():
         if check == ord('r'):
             cap.release()
             cv2.destroyAllWindows()
+            image_path = glob.glob("/home/pi/Desktop/ROS/ros_main/src/BMO/src/faces/*.png")
             for i in image_path:
                 os.remove(i)
             create_user_dataset.create_dataset()
-            image_path = glob.glob("faces/*.png")
-            model = create_model(image_path)
+            data_path = '/home/pi/Desktop/ROS/ros_main/src/BMO/src/faces/'
+            model = create_model(data_path)
             cap = cv2.VideoCapture(0)
 
         if check == ord('a'):
             cap.release()
             cv2.destroyAllWindows()
+            image_path = glob.glob("/home/pi/Desktop/ROS/ros_main/src/BMO/src/faces/*.png")
             create_user_dataset.create_dataset(len(image_path))
-            image_path = glob.glob("faces/*.png")
-            model = create_model(image_path)
+            data_path = '/home/pi/Desktop/ROS/ros_main/src/BMO/src/faces/'
+            model = create_model(data_path)
             cap = cv2.VideoCapture(0)
 
         if check == 27:
