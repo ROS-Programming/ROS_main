@@ -210,3 +210,5 @@ target_link_libraries(camera ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+catkin_install_python(PROGRAMS src/AI.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+catkin_install_python(PROGRAMS src/mp_cv_test.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
