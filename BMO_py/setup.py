@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'AI = BMO_py.AI:main',
+            'button = BMO_py.button:main',
             'test = BMO_py.test:main',
         ],
     },

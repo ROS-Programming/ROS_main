@@ -1,4 +1,5 @@
-#include <chrono>
+#include <stdio.h>
+#include <string.h>
 #include <functional>
 #include <memory>
 #include <string>
@@ -11,48 +12,23 @@
 
 using namespace cv;
 using namespace std;
-using namespace std::chrono_literals;
+using std::placeholders::_1;
 
 int main(int argc, char * argv[])
 {
 	rclcpp::init(argc, argv);
-	Mat img_color;
-	int val = 1;
-	img_color = imread("/home/ubuntu/Desktop/ROS/ros_main/BMO_cpp/src/BMO_Faces/" + to_string(val) +".jpg", IMREAD_COLOR);
-	if (img_color.empty()) return -1;
-	namedWindow("BMO");
-	imshow("BMO", img_color);
+  FILE *file;
+  //Opening device file
 
-	while (1)
-	{
-		int key = waitKey(1);
-		if (key == 27) break;
-		else if (key == 'a')
-		{
-			if (val <= 1) continue;
-			else
-			{
-				val -= 1;
-				img_color = imread("/home/ubuntu/Desktop/ROS/ros_main/BMO_cpp/src/BMO_Faces/" + to_string(val) + ".jpg", IMREAD_COLOR);
-				if (img_color.empty()) return -1;
-				namedWindow("BMO");
-				imshow("BMO", img_color);
-			}
-		}
-		else if (key == 'd')
-		{
-			if (val >= 9) continue;
-			else
-			{
-				val += 1;
-				img_color = imread("/home/ubuntu/Desktop/ROS/ros_main/BMO_cpp/src/BMO_Faces/" + to_string(val) + ".jpg", IMREAD_COLOR);
-				if (img_color.empty()) return -1;
-				namedWindow("BMO");
-				imshow("BMO", img_color);
-			}
-		}
-	}
+  int getnum;
 
-	destroyAllWindows();
-	return 0;
+  while (true)
+    {
+      file = fopen("/dev/ttyACM1 (Arduino Micro)", "w");
+      cout << ">>" << endl;
+      cin >> getnum;
+      fprintf(file, "%d", getnum); //Writing to the file
+      fclose(file);
+    }
+
 }
